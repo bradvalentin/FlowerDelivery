@@ -2,11 +2,17 @@ package com.example.flowerdelivery.ui.orders
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
 import com.example.flowerdelivery.R
 import com.example.flowerdelivery.data.entity.Order
 import com.example.flowerdelivery.databinding.FragmentOrdersBinding
@@ -19,10 +25,17 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, MenuItem.OnAc
     private val ordersViewModel by viewModel<OrdersViewModel>()
     private lateinit var viewDataBinding: FragmentOrdersBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        ordersViewModel.getAllOrders()
+        ordersViewModel.getOrdersList().observe(this, Observer {
+            if (it != null && it.isNotEmpty()) {
+                ordersRecyclerViewAdapter.clearAll()
+                ordersRecyclerViewAdapter.setOrders(it)
+            }
+        })
     }
 
     override fun onCreateView(
@@ -35,12 +48,6 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, MenuItem.OnAc
         )
         viewDataBinding.lifecycleOwner = this
 
-        return viewDataBinding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         viewDataBinding.ordersRecyclerView.apply {
             adapter = ordersRecyclerViewAdapter
         }
@@ -49,14 +56,19 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, MenuItem.OnAc
         viewDataBinding.swipeContainer.setOnRefreshListener {
             ordersViewModel.getAllOrders(false)
         }
-        ordersViewModel.getAllOrders()
-        ordersViewModel.ordersList.observe(viewLifecycleOwner, Observer {
-            if (it != null && it.isNotEmpty()) {
-                ordersRecyclerViewAdapter.clearAll()
-                ordersRecyclerViewAdapter.setOrders(it)
-            }
-        })
 
+        sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+
+        return viewDataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        viewDataBinding.ordersRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -87,17 +99,36 @@ class OrdersFragment : Fragment(), SearchView.OnQueryTextListener, MenuItem.OnAc
     }
 
     override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-        ordersViewModel.isSearching.value = true
+        viewDataBinding.swipeContainer.isEnabled = false
         return true
     }
 
     override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-        ordersViewModel.isSearching.value = false
+        viewDataBinding.swipeContainer.isEnabled = true
         return true
     }
 
-    override fun onItemClick(order: Order) {
-        Toast.makeText(context?.applicationContext, order.name, Toast.LENGTH_LONG).show()
+    override fun onItemClick(
+        order: Order,
+        imageView: ImageView,
+        orderItemName: TextView,
+        costumerName: TextView,
+        distance: TextView
+    ) {
+
+        val direction: NavDirections =
+            OrdersFragmentDirections.actionOrdersFragmentToOrderDetailsFragment(order)
+
+        val extras = FragmentNavigatorExtras(
+            imageView to order.image_url,
+            orderItemName to order.name,
+            costumerName to order.contact.deliver_to,
+            distance to order.distance.toString()
+        )
+
+        findNavController().navigate(direction, extras)
+
     }
+
 
 }

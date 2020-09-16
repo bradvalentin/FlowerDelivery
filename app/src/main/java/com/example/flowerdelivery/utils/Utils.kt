@@ -53,8 +53,3 @@ fun formatToKm(view: TextView, distanceInMeters: Int) {
 fun isRefreshing(view: SwipeRefreshLayout, isRefreshing: Boolean) {
     view.isRefreshing = !isRefreshing
 }
-
-@BindingAdapter("android:isEnabled")
-fun isEnabled(view: SwipeRefreshLayout, isEnabled: Boolean) {
-    view.isEnabled = !isEnabled
-}

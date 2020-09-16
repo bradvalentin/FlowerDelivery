@@ -30,6 +30,11 @@ class OrdersRecyclerViewAdapter(private val orderClickListener: OrderClickListen
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         holder.view.apply {
             order = ordersList[position]
+            flowerImageView.transitionName = ordersList[position].image_url
+            orderItemName.transitionName = ordersList[position].name
+            costumerName.transitionName = ordersList[position].contact.deliver_to
+            distance.transitionName = ordersList[position].distance.toString()
+
             orderClickInterface = orderClickListener
         }
     }

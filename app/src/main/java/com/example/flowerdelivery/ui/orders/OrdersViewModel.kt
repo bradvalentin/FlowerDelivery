@@ -1,5 +1,6 @@
 package com.example.flowerdelivery.ui.orders
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,10 +11,14 @@ import kotlinx.coroutines.launch
 
 class OrdersViewModel(private val repository: OrdersRepository) : ViewModel() {
 
-    val showLoading = MutableLiveData<Boolean>()
-    val ordersList = MutableLiveData<ArrayList<Order>>()
-    val showError = MutableLiveData<String>()
-    val isSearching = MutableLiveData<Boolean>()
+    private val showLoading = MutableLiveData<Boolean>()
+    fun getShowLoading(): LiveData<Boolean> = showLoading
+
+    private val ordersList = MutableLiveData<ArrayList<Order>>()
+    fun getOrdersList(): LiveData<ArrayList<Order>> = ordersList
+
+    private val showError = MutableLiveData<String>()
+    fun getShowError(): LiveData<String> = showError
 
     fun getAllOrders(withLoading: Boolean = true) {
         showLoading.value = withLoading

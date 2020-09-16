@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="order"
+            type="com.example.flowerdelivery.data.entity.Order" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="24dp">
+
+
+            <ImageView
+                android:id="@+id/flowerImageView"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:imageUrl="@{order.image_url}"
+                android:scaleType="fitXY"
+                android:transitionName="flowerImageView"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderItemName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{order.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textIsSelectable="true"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/flowerImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/costumerTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/to_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/flowerImageView"
+                app:layout_constraintTop_toBottomOf="@+id/orderItemName" />
+
+            <TextView
+                android:id="@+id/costumerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{order.contact.deliver_to}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/costumerTextView"
+                app:layout_constraintTop_toBottomOf="@+id/orderItemName" />
+
+            <TextView
+                android:id="@+id/phoneTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{order.contact.phone}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/costumerTextView"
+                app:layout_constraintTop_toBottomOf="@+id/costumerName" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{@string/dollar_price(order.price)}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/flowerImageView"
+                app:layout_constraintTop_toBottomOf="@+id/phoneTextView" />
+
+            <TextView
+                android:id="@+id/deliveryDateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@string/delivery_date_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flowerImageView" />
+
+            <TextView
+                android:id="@+id/deliveryDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{order.delivery_date}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDateTextView" />
+
+            <TextView
+                android:id="@+id/deliveryTimeTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@string/delivery_time_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryDate" />
+
+            <TextView
+                android:id="@+id/deliveryTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{order.delivery_time}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryTimeTextView" />
+
+            <TextView
+                android:id="@+id/addressTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@string/address_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deliveryTime" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{order.contact.address}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressTextView" />
+
+            <TextView
+                android:id="@+id/distanceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@string/distance_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:distanceInKm="@{order.distance}"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/distanceTextView"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
+
+            <TextView
+                android:id="@+id/greetingTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@string/greetings_card_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                android:visibility="@{order.greeting_card != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/distanceTextView" />
+
+            <TextView
+                android:id="@+id/greeting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:text="@{order.greeting_card}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                android:visibility="@{order.greeting_card != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/greetingTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
