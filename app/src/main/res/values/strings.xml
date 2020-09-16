@@ -3,4 +3,6 @@
     <string name="buddha_quote">“If we could see the miracle of a single flower clearly our whole life would change.“ \n\n- Buddha</string>
     <string name="to_text">To:</string>
     <string name="distance_text">Distance:</string>
+    <string name="search_text">Search</string>
+    <string name="search_view_hint">Search by costumer</string>
 </resources>
