@@ -1,10 +1,11 @@
-package com.example.flowerdelivery
+package com.example.flowerdelivery.ui.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.random.Random
+import com.example.flowerdelivery.R
+import com.example.flowerdelivery.ui.MainActivity
 
 
 private const val SPLASH_DISPLAY_LENGTH = 2000

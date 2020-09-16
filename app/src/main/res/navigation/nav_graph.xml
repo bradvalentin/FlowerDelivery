@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="com.example.flowerdelivery.OrdersFragment"
+        android:name="com.example.flowerdelivery.ui.orders.OrdersFragment"
         android:label="OrdersFragment" />
 </navigation>

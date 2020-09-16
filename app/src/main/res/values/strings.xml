@@ -5,4 +5,7 @@
     <string name="distance_text">Distance:</string>
     <string name="search_text">Search</string>
     <string name="search_view_hint">Search by costumer</string>
+    <string name="no_network">No Network Connectivity</string>
+    <string name="dollar_price">$%s</string>
+
 </resources>

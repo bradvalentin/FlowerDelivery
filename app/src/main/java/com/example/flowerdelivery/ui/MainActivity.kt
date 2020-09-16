@@ -1,7 +1,8 @@
-package com.example.flowerdelivery
+package com.example.flowerdelivery.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.flowerdelivery.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
