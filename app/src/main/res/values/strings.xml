@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FlowerDelivery</string>
+    <string name="buddha_quote">“If we could see the miracle of a single flower clearly our whole life would change.“ \n\n- Buddha</string>
+    <string name="to_text">To:</string>
+    <string name="distance_text">Distance:</string>
+    <string name="search_text">Search</string>
+    <string name="search_view_hint">Search by costumer</string>
+    <string name="no_network">No Network Connectivity</string>
+    <string name="dollar_price">$%s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delivery_date_text">Delivery date</string>
+    <string name="delivery_time_text">Delivery time</string>
+    <string name="address_text">Address</string>
+    <string name="greetings_card_text">Greetings card</string>
+
 </resources>
